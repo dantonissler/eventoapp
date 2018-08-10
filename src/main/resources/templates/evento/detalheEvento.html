@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>EventoApp</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="style/styleCss.css" />
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper green">
+				<a href="#" class="brand-logo">Evento</a>
+				<ul id="nav-mobile" class="right hide-onmed-and-down">
+					<li><a href="/eventos"
+						class="waves-effect waves-light btn red"> <i
+							class="Large material-icons left">note_add</i> Lista de eventos
+					</a></li>
+				</ul>
+				<ul id="nav-mobile" class="right hide-onmed-and-down">
+					<li><a href="/cadastrarEvento"
+						class="waves-effect waves-light btn red"> <i
+							class="Large material-icons left">note_add</i>Cadastrar eventos
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div th:each="evento : ${evento}" class="container detalhesEvento">
+		<div class="row">
+			<h5>Detalhes do Evento</h5>
+			<p>
+				Nome: <span th:text="${evento.nome}"></span>
+			</p>
+			<p>
+				Local: <span th:text="${evento.local}"></span>
+			</p>
+			<p>
+				Data: <span th:text="${evento.data}"></span>
+			</p>
+			<p>
+				Horário: <span th:text="${evento.horario}"></span>
+			</p>
+
+		</div>
+	</div>
+	<div class="container formConvidado">
+		<th:block th:include="MensagemValidacao"></th:block>
+		<form class="container" method="post">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">textsms</i> <input type="text"
+					name="nomeConvidado" value="" id="autocomplete-input"
+					class="autocomplete" /> <label for="autocomplete-input">Nome
+				</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">textsms</i> <input
+					placeholder="000.000.000-00" type="text" name="cpf" value=""
+					id="autocomplete-input" class="autocomplete" /> <label
+					for="autocomplete-input">CPF</label>
+			</div>
+			<button class="btn waves-effect waves-light blue" type="submit"
+				name="action">
+				Salvar <i class="material-icons right">send</i>
+			</button>
+		</form>
+	</div>
+	<table class="container tableConvidado">
+		<thead>
+			<tr>
+				<th>Nome Convidado</th>
+				<th>CPF</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="convidado : ${convidados}">
+				<td><span th:text="${convidado.nomeConvidado}"></span></td>
+				<td><span th:text="${convidado.cpf}"></span></td>
+				<td><a
+					class="waves-effect waves-light btn-Medium red-text text-darken-2"
+					th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidado.cpf)).build()}">
+						<i class="material-icons">delete</i>
+				</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>
