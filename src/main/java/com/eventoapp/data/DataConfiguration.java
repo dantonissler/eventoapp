@@ -13,7 +13,7 @@ public class DataConfiguration {
 
 	@Bean
     public BasicDataSource dataSource() throws URISyntaxException {
-        URI dbUri = new URI(System.getenv("postgres://jsjuhildtcyjqx:496de2c055d0d43f6e40b68572adbbea3798fcdc25c899f39aa9b13649500e24@ec2-54-235-212-58.compute-1.amazonaws.com:5432/df4oc6jffpijo9"));
+        URI dbUri = new URI(System.getenv("postgres://<cklfnxazyikewb>:<188368d1b13c43d59e6652d6c4f40a2ee6f2b23f7c88a2092703dc76344e3a2b>@<ec2-54-235-212-58.compute-1.amazonaws.com>/<ddf0p5602o7ora>"));
 
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
